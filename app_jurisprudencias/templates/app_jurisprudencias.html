@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Jurisprudencias</title>
+</head>
+<body>
+    <h1>Buscar Jurisprudencias</h1>
+
+    <form method="POST" action="{% url 'buscar_jurisprudencias' %}">
+        {% csrf_token %}
+        <label for="id">ID:</label>
+        <input type="text" name="id" id="id" required>
+
+        <!-- Otros campos del formulario -->
+
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if resultados %}
+        <h2>Resultados:</h2>
+        <ul>
+            {% for resultado in resultados %}
+                <li>{{ resultado.id }}</li>
+                <li>{{ resultado.tipoCausa }}</li>
+                <li>{{ resultado.rol }}</li>
+                <li>{{ resultado.caratula }}</li>
+                <li>{{ resultado.nombreProyecto }}</li>
+                <li>{{ resultado.descriptores }}</li>
+                <li>{{ resultado.linkSentencia }}</li>
+                <li>{{ resultado.urlSentencia }}</li>
+                 
+                <!-- Mostrar otros campos de la jurisprudencia -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron resultados.</p>
+    {% endif %}
+</body>
+</html>
